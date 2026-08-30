@@ -1,0 +1,16 @@
+# Shell 脚本与构建配置必须保持 LF：CRLF 会导致 #!/bin/bash^M 无法执行
+*.sh text eol=lf
+*.spec text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.py text eol=lf
+
+# Windows 批处理必须保持 CRLF
+*.bat text eol=crlf
+
+# 二进制资源，禁止任何换行转换
+*.ttf binary
+*.png binary
+*.jpg binary
+*.apk binary
+*.tar.gz binary
