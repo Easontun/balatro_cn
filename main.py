@@ -72,7 +72,7 @@ class App:
 
         self.android = bool(os.environ.get("ANDROID_ARGUMENT")) or \
             os.path.exists("/system/bin/app_process")
-        flags = pygame.FULLSCREEN if self.android else (pygame.RESIZABLE | pygame.DOUBLEBUF)
+        flags = (pygame.FULLSCREEN | pygame.SCALED) if self.android else (pygame.RESIZABLE | pygame.DOUBLEBUF)
         self.screen = pygame.display.set_mode((W, H), flags)
         pygame.display.set_caption(TITLE)
         try:
