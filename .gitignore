@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# PyInstaller / buildozer
+build/
+dist/
+bin/
+*.spec
+!buildozer.spec
+.buildozer/
+build_log.txt
+
+# 渲染截图（调试产物）
+shots/
+
+# 字体裁剪临时文件与原始可变字体（17MB，构建时不需要）
+_inst_*.ttf
+fonts/NotoSansSC-VF.ttf
+
+# Android 产物
+*.apk
+*.aab
