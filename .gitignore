@@ -23,3 +23,6 @@ fonts/NotoSansSC-VF.ttf
 # Android 产物
 *.apk
 *.aab
+
+# WSL 构建资源（Ubuntu rootfs 约 330MB，远超 GitHub 100MB 限制，不提交）
+.wsl_assets/
