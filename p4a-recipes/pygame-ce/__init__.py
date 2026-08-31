@@ -17,7 +17,14 @@ class PygameCERecipe(CompiledComponentsPythonRecipe):
     site_packages_name = "pygame"
     name = "pygame-ce"
 
+    # cython 必须显式列出：p4a 用自己构建的 hostpython3 来跑
+    # `setup.py build_ext`，而 Cython 只装在运行器系统 Python 里是不够的，
+    # 必须通过 recipe 依赖装进 hostpython3，否则报
+    # "You need cython. https://cython.org/"。
+    # p4a 的 cython recipe 版本是 0.29.36（<3.0），pygame-ce 2.5.0 的
+    # build-system.requires 里 cython 无版本约束，二者兼容。
     depends = [
+        "cython",
         "sdl2",
         "sdl2_image",
         "sdl2_mixer",
