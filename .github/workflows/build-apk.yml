@@ -1,10 +1,14 @@
 name: 构建 APK
 
-# 触发方式（任选其一）：
-#   1. 推送 v* 标签：  git tag v1.0 && git push origin v1.0
-#   2. 手动触发：     GitHub 仓库 → Actions → 构建 APK → Run workflow
+# 触发方式：
+#   1. 推送到 master 分支（最常用，推送即自动构建）
+#   2. 推送 v* 标签：  git tag v1.0 && git push origin v1.0
+#   3. 手动触发：     GitHub 仓库 → Actions → 构建 APK → Run workflow
+# 注意：若只配 tags 触发，推送 master 不会自动构建，容易造成"改了没生效"的误解。
 on:
   push:
+    branches:
+      - master
     tags:
       - 'v*'
   workflow_dispatch:
