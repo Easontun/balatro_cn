@@ -26,8 +26,9 @@ numeric_version = 1
 # 不锁定精确版本：p4a 的 python3 recipe 只接受白名单内的版本号，
 # 写错会在解析需求时立刻失败，交给 p4a 使用默认版本最稳。
 # pygame-ce 通过自定义 recipe（p4a-recipes/pygame-ce）以 SDL2 方式交叉编译
+# 注意：键名必须是 p4a.local_recipes（不是 p4a.recipes），否则 p4a 找不到自定义 recipe
 requirements = python3,pygame-ce
-p4a.recipes = p4a-recipes
+p4a.local_recipes = p4a-recipes
 
 # 启动入口
 # p4a 会寻找该文件并作为 APK 主程序运行
