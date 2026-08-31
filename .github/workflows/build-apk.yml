@@ -57,8 +57,17 @@ jobs:
           # yes 被 SIGPIPE 杀掉(退出码 141)会让构建"假失败"。
           # SDK 授权已由 buildozer.spec 的 android.accept_sdk_license = True 处理。
           buildozer -v android debug 2>&1 | tee build.log
-          echo "---- 构建结果 ----"
-          ls -lh bin/ 2>/dev/null || echo "bin 目录不存在"
+          echo "---- 查找所有 .apk ----"
+          find . -name "*.apk" -type f -ls || true
+          echo "---- bin/ 目录内容 ----"
+          ls -lha bin/ 2>/dev/null || echo "bin 目录不存在"
+          echo "---- 校验 APK 必须存在 ----"
+          apk_count=$(find bin -name "*.apk" -type f | wc -l)
+          if [ "$apk_count" -eq 0 ]; then
+            echo "ERROR: 未找到 bin/*.apk"
+            exit 1
+          fi
+          echo "找到 $apk_count 个 APK"
 
       - name: 上传 APK 产物
         if: always()
@@ -69,8 +78,8 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-      - name: 上传构建日志（便于排查）
-        if: failure()
+      - name: 上传构建日志（无论成败都上传，便于排查无 APK 的"假成功"）
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: build-log
